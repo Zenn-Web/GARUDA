@@ -4,8 +4,13 @@
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~57.0.9",
+    "@react-native-firebase/app": "^26.1.0",
+    "@react-native-firebase/auth": "^26.1.0",
+    "@react-native-firebase/firestore": "^26.1.0",
+    "@react-native-firebase/messaging": "^26.1.0",
     "expo": "~57.0.11",
     "expo-constants": "~57.0.9",
+    "expo-dev-client": "~57.0.10",
     "expo-device": "~57.0.1",
     "expo-font": "~57.0.1",
     "expo-glass-effect": "~57.0.1",

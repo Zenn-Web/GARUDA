@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790920652376",
+    "project_id": "garuda-project-89c40",
+    "storage_bucket": "garuda-project-89c40.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790920652376:android:ef5ada0edcf40f393a8c2d",
+        "android_client_info": {
+          "package_name": "com.garuda.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_Z8H9uHK6JYXkjuiRVrj_Oq6I2ewYjNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
