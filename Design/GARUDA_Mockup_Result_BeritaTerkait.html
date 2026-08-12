@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GARUDA - Hasil Pemeriksaan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary": "#ffffff", "surface-dim": "#d9dadb", "inverse-surface": "#2e3132",
+          "surface-container": "#edeeef", "surface": "#f8f9fa", "on-secondary-fixed": "#002113",
+          "outline": "#707974", "on-secondary-container": "#00714d", "secondary": "#006c49",
+          "secondary-container": "#6cf8bb", "surface-variant": "#e1e3e4", "on-error-container": "#93000a",
+          "surface-tint": "#2b6954", "inverse-primary": "#95d3ba", "tertiary-fixed-dim": "#ffb95f",
+          "on-primary-fixed": "#002117", "surface-container-high": "#e7e8e9", "background": "#f8f9fa",
+          "primary-container": "#064e3b", "on-surface-variant": "#404944", "tertiary-container": "#623c00",
+          "surface-container-highest": "#e1e3e4", "on-primary": "#ffffff", "error-container": "#ffdad6",
+          "on-tertiary-container": "#f69f0d", "primary-fixed": "#b0f0d6", "surface-container-low": "#f3f4f5",
+          "error": "#ba1a1a", "on-primary-fixed-variant": "#0b513d", "primary": "#003527",
+          "tertiary-fixed": "#ffddb8", "on-secondary-fixed-variant": "#005236", "on-background": "#191c1d",
+          "outline-variant": "#bfc9c3", "secondary-fixed": "#6ffbbe", "on-surface": "#191c1d",
+          "surface-bright": "#f8f9fa", "on-error": "#ffffff", "primary-fixed-dim": "#95d3ba",
+          "on-secondary": "#ffffff", "tertiary": "#442800", "on-tertiary-fixed": "#2a1700",
+          "on-tertiary-fixed-variant": "#653e00", "surface-container-lowest": "#ffffff",
+          "on-primary-container": "#80bea6", "inverse-on-surface": "#f0f1f2", "secondary-fixed-dim": "#4edea3",
+          "safe": "#10B981", "safe-container": "#d1fae5", "warning": "#F59E0B", "warning-container": "#fef3c7",
+          "danger": "#EF4444", "danger-container": "#fee2e2"
+        },
+        "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        "spacing": {
+          "stack-md": "1rem", "margin-mobile": "1.5rem", "touch-target-min": "3.5rem",
+          "gutter-mobile": "1rem", "stack-sm": "0.5rem", "stack-lg": "2rem"
+        },
+        "fontFamily": {
+          "label-lg": ["Atkinson Hyperlegible Next"], "body-md": ["Atkinson Hyperlegible Next"],
+          "headline-lg": ["Atkinson Hyperlegible Next"], "body-lg": ["Atkinson Hyperlegible Next"],
+          "headline-md": ["Atkinson Hyperlegible Next"], "button": ["Atkinson Hyperlegible Next"]
+        },
+        "fontSize": {
+          "label-lg": ["16px", {"lineHeight":"24px","letterSpacing":"0.01em","fontWeight":"600"}],
+          "body-md": ["18px", {"lineHeight":"28px","fontWeight":"400"}],
+          "headline-lg": ["32px", {"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],
+          "body-lg": ["20px", {"lineHeight":"30px","fontWeight":"400"}],
+          "headline-md": ["24px", {"lineHeight":"32px","fontWeight":"700"}],
+          "button": ["18px", {"lineHeight":"24px","fontWeight":"700"}]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+
+<header class="w-full top-0 sticky bg-surface text-primary font-headline-md shadow-sm flex justify-between items-center px-margin-mobile h-touch-target-min z-50">
+  <div class="flex items-center gap-2 text-primary font-headline-lg tracking-tight">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+    GARUDA
+  </div>
+  <button onclick="toggleStatus()" class="text-label-lg font-label-lg text-on-surface-variant underline">Ganti contoh</button>
+</header>
+
+<main class="flex-grow flex flex-col px-margin-mobile py-stack-lg max-w-lg mx-auto w-full">
+
+  <!-- STATUS CARD -->
+  <div id="statusCard" class="rounded-xl border-t-[6px] p-6 shadow-[0_8px_40px_rgba(0,53,39,0.08)] mb-stack-lg transition-colors duration-300">
+    <div class="flex items-center gap-3 mb-stack-sm">
+      <span id="statusIcon" class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;"></span>
+      <h1 id="statusLabel" class="font-headline-lg text-headline-lg"></h1>
+    </div>
+    <p id="statusConfidence" class="font-body-md text-on-surface-variant mb-stack-md"></p>
+    <p id="statusTip" class="font-body-lg text-on-surface leading-relaxed"></p>
+
+    <!-- CATATAN: disclaimer soal false positive / hadiah asli -->
+    <div id="catatanBox" class="mt-stack-md pt-stack-md border-t border-outline-variant hidden">
+      <p class="font-label-lg text-label-lg text-on-surface-variant mb-1">Catatan</p>
+      <p class="font-body-md text-on-surface-variant leading-relaxed">
+        Meski terdeteksi berisiko, kalau kamu yakin pesan ini dari sumber resmi yang kamu ikuti sendiri,
+        jangan klik link di pesan ini. Buka langsung aplikasi resminya untuk mengecek klaim — bukan lewat
+        link yang dikirim.
+      </p>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="w-full flex flex-col gap-stack-md">
+    <button class="w-full h-touch-target-min bg-surface text-primary font-button text-button rounded-xl border-2 border-primary flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200">
+      <span class="material-symbols-outlined">family_restroom</span>
+      Bagikan ke Guardian
+    </button>
+
+    <!-- BERITA TERKAIT: butuh internet, gagal terisolasi -->
+    <button onclick="toggleBerita()" class="w-full h-touch-target-min bg-surface-container-low text-on-surface font-button text-button rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200">
+      <span class="material-symbols-outlined">newspaper</span>
+      Lihat Ringkasan &amp; Berita Terkait
+    </button>
+  </div>
+
+  <!-- BERITA TERKAIT: state ONLINE (ada artikel) -->
+  <div id="beritaOnline" class="hidden mt-stack-lg flex flex-col gap-stack-sm">
+    <p class="font-label-lg text-label-lg text-on-surface-variant px-1">Kasus serupa yang pernah diberitakan</p>
+    <a href="#" class="block rounded-xl bg-surface-container-lowest border border-outline-variant p-5 shadow-sm hover:shadow-md transition-shadow">
+      <p class="font-label-lg text-label-lg text-primary mb-1">OJK.go.id</p>
+      <p class="font-body-md text-on-surface font-semibold mb-1">Waspada Modus Phishing Mengatasnamakan Bank Lewat WhatsApp</p>
+      <p class="font-body-md text-on-surface-variant text-sm">OJK mengimbau masyarakat tidak mengklik tautan dari pesan tak dikenal yang mengaku dari pihak bank.</p>
+    </a>
+    <a href="#" class="block rounded-xl bg-surface-container-lowest border border-outline-variant p-5 shadow-sm hover:shadow-md transition-shadow">
+      <p class="font-label-lg text-label-lg text-primary mb-1">Komdigi.go.id</p>
+      <p class="font-body-md text-on-surface font-semibold mb-1">Kenali Ciri-Ciri Pesan Penipuan Berkedok Undian Berhadiah</p>
+      <p class="font-body-md text-on-surface-variant text-sm">Komdigi mencatat ribuan laporan modus serupa dalam sebulan terakhir.</p>
+    </a>
+  </div>
+
+  <!-- BERITA TERKAIT: state OFFLINE (gagal terisolasi, bukan blokir semua) -->
+  <div id="beritaOffline" class="hidden mt-stack-lg rounded-xl bg-surface-container-low p-5 flex items-center gap-3">
+    <span class="material-symbols-outlined text-on-surface-variant">wifi_off</span>
+    <p class="font-body-md text-on-surface-variant">Butuh koneksi internet untuk memuat berita terkait. <button onclick="toggleBerita()" class="text-primary underline font-semibold">Coba lagi</button></p>
+  </div>
+
+  <!-- Disclaimer persisten -->
+  <p class="font-label-lg text-label-lg text-on-surface-variant text-center mt-stack-lg px-4">
+    GARUDA membantu mengenali pola pesan mencurigakan, tapi hasilnya adalah indikasi — bukan kepastian mutlak.
+    Tetap verifikasi lewat aplikasi/nomor resmi kalau ragu.
+  </p>
+
+</main>
+
+<script>
+  const states = {
+    bahaya: {
+      cardClasses: 'bg-danger-container border-danger',
+      icon: 'gpp_maybe', iconColor: 'text-danger',
+      label: 'BAHAYA', labelColor: 'text-on-error-container',
+      confidence: 'Tingkat keyakinan: 91%',
+      tip: 'Jangan klik link, jangan bagikan OTP/PIN/password ke siapa pun. Hubungi bank resmi lewat aplikasi atau nomor resmi kalau ragu.',
+      showCatatan: true
+    },
+    aman: {
+      cardClasses: 'bg-safe-container border-safe',
+      icon: 'verified_user', iconColor: 'text-safe',
+      label: 'AMAN', labelColor: 'text-on-surface',
+      confidence: 'Tingkat keyakinan: 87%',
+      tip: 'Model tidak menemukan pola credential phishing pada pesan ini. Tetap berhati-hati kalau ada permintaan data pribadi.',
+      showCatatan: false
+    }
+  };
+  let current = 'bahaya';
+  let beritaMode = 'online'; // toggle 'online' / 'offline' buat demo dua kondisi
+
+  function render() {
+    const s = states[current];
+    const card = document.getElementById('statusCard');
+    card.className = 'rounded-xl border-t-[6px] p-6 shadow-[0_8px_40px_rgba(0,53,39,0.08)] mb-stack-lg transition-colors duration-300 ' + s.cardClasses;
+    const icon = document.getElementById('statusIcon');
+    icon.textContent = s.icon;
+    icon.className = 'material-symbols-outlined text-[40px] ' + s.iconColor;
+    const label = document.getElementById('statusLabel');
+    label.textContent = s.label;
+    label.className = 'font-headline-lg text-headline-lg ' + s.labelColor;
+    document.getElementById('statusConfidence').textContent = s.confidence;
+    document.getElementById('statusTip').textContent = s.tip;
+    document.getElementById('catatanBox').classList.toggle('hidden', !s.showCatatan);
+  }
+
+  function toggleStatus() {
+    current = current === 'bahaya' ? 'aman' : 'bahaya';
+    render();
+  }
+
+  function toggleBerita() {
+    const online = document.getElementById('beritaOnline');
+    const offline = document.getElementById('beritaOffline');
+    if (!online.classList.contains('hidden') || !offline.classList.contains('hidden')) {
+      online.classList.add('hidden');
+      offline.classList.add('hidden');
+      return;
+    }
+    // ganti beritaMode = 'offline' di baris atas buat demo state gagalnya
+    if (beritaMode === 'online') {
+      online.classList.remove('hidden');
+    } else {
+      offline.classList.remove('hidden');
+    }
+  }
+
+  render();
+</script>
+</body></html>
