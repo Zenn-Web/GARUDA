@@ -1,6 +1,5 @@
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
 
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
 
@@ -8,14 +7,14 @@ import '../../global.css';
 
 SplashScreen.preventAutoHideAsync();
 
+// GARUDA light-only tidak mengikuti dark mode sistem, lihat CONTEXT.md.
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <AnimatedSplashOverlay />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="result" options={{ title: 'Hasil Pemeriksaan' }} />
+        <Stack.Screen name="result" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );

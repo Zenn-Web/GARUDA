@@ -5,10 +5,10 @@ describe('alur Home → Result', () => {
     const app = await renderRouter('src/app', { initialUrl: '/' });
 
     await fireEvent.changeText(
-      app.getByPlaceholderText('Tempel atau ketik pesan yang mau dicek'),
+      app.getByPlaceholderText('Tempel atau ketik pesan di sini...'),
       'Rekening BCA Anda akan diblokir, klik link ini untuk verifikasi',
     );
-    await fireEvent.press(app.getByText('Cek Pesan Ini'));
+    await fireEvent.press(app.getByText('Periksa Pesan Ini'));
 
     await waitFor(() => {
       expect(app.getByText('BAHAYA')).toBeTruthy();

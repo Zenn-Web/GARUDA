@@ -10,6 +10,5 @@ jest.mock('react-native-worklets', () => ({
 // Ikon/splash beranimasi butuh reanimated + JSI. Murni dekorasi, tidak dipakai
 // oleh alur yang diuji, jadi diganti komponen kosong.
 jest.mock('@/components/animated-icon', () => ({
-  AnimatedIcon: () => null,
   AnimatedSplashOverlay: () => null,
 }));

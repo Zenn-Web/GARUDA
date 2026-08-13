@@ -1,0 +1,116 @@
+{
+  "_readme": "Kamus statis, dibundle ke app (src/data/knowledgeBase.json). Key harus sama persis dengan kategori yang dihasilkan logic keyword-matching (kategorisasi.js). Field per kategori: label (judul), tips (kalimat ringkas), rekomendasi (saran resmi), indikasi (bullet 'Indikasi yang dikenali' di layar BAHAYA), tindakan (list bernomor 'Lakukan ini sekarang'), artikel_rujukan (berita/bacaan opsional). Cara nambah: cari entri kategori yang sesuai, edit array yang relevan. Jangan hapus 'kontak_resmi', itu tampil di semua kategori.",
+  "kontak_resmi": {
+    "ojk": "Kontak OJK 157 (telepon/WhatsApp) atau ojk.go.id",
+    "iasc": "Laporkan rekening/nomor mencurigakan lewat cekrekening.id (Indonesia Anti-Scam Centre)"
+  },
+  "kategori": {
+    "link_pemblokiran_akun": {
+      "label": "Ancaman Pemblokiran Akun/Rekening",
+      "tips": "Bank atau e-wallet resmi TIDAK PERNAH mengancam blokir mendadak lewat link di SMS/WA. Jangan klik link, jangan masukkan PIN/password di luar aplikasi resmi.",
+      "rekomendasi": "Kalau ragu akun benar-benar bermasalah, buka aplikasi bank/e-wallet resminya langsung (jangan lewat link pesan), atau hubungi customer service resmi lewat nomor yang tertera di kartu/aplikasi.",
+      "artikel_rujukan": [
+        {
+          "judul": "Kenali Pola Penipuan 2026 agar Tak Jadi Korban Berikutnya",
+          "sumber": "Diskominfo Kabupaten Malang",
+          "catatan": "Menjelaskan phishing berbasis link palsu sebagai modus dominan, termasuk pola pemblokiran akun.",
+          "url": "https://kominfo.malangkab.go.id"
+        }
+      ],
+      "indikasi": [
+        "Mengaku dari bank/e-wallet resmi",
+        "Mengancam akun/rekening diblokir mendadak",
+        "Mengarahkan ke tautan untuk \"verifikasi\""
+      ],
+      "tindakan": [
+        "Jangan klik tautan.",
+        "Jangan berikan OTP/PIN/password.",
+        "Hubungi pihak resmi jika ragu."
+      ]
+    },
+    "link_verifikasi_pihak_ketiga": {
+      "label": "Link Verifikasi Data (Kurir/Instansi Palsu)",
+      "tips": "Kurir dan instansi resmi tidak minta nomor rekening atau PIN untuk 'melengkapi data alamat'. Verifikasi lewat aplikasi resmi kurir/instansi, bukan link di pesan.",
+      "rekomendasi": "Cek nomor resi langsung di aplikasi/website resmi kurir. Untuk urusan Dukcapil/BPJS/pajak, datangi kantor resmi atau gunakan aplikasi resmi masing-masing instansi.",
+      "artikel_rujukan": [
+        {
+          "judul": "Komdigi: Nilai Kerugian akibat Penipuan Online Capai Rp7,5 Triliun",
+          "sumber": "Kompas.com",
+          "catatan": "Konfirmasi resmi Komdigi soal skala kerugian dan ragam modus penipuan digital di Indonesia.",
+          "url": "https://kompas.com"
+        }
+      ],
+      "indikasi": [
+        "Mengaku dari kurir/instansi resmi",
+        "Meminta lengkapi data pribadi/rekening",
+        "Mengarahkan ke tautan mencurigakan"
+      ],
+      "tindakan": [
+        "Jangan klik tautan.",
+        "Jangan isi data pribadi di tautan tersebut.",
+        "Cek langsung lewat aplikasi/kantor resmi jika ragu."
+      ]
+    },
+    "link_hadiah_undian": {
+      "label": "Hadiah/Undian Palsu",
+      "tips": "Undian resmi tidak pernah minta kamu login ulang pakai username/password lewat link eksternal untuk klaim hadiah.",
+      "rekomendasi": "Cek status hadiah langsung dari aplikasi resmi penyelenggara (buka app-nya sendiri, jangan lewat link), bukan dari link yang dikirim lewat SMS/WA.",
+      "artikel_rujukan": [
+        {
+          "judul": "65 Persen Masyarakat Indonesia Terima Penipuan Digital Mingguan",
+          "sumber": "Komdigi (dikutip Babelinsight)",
+          "catatan": "Data resmi Komdigi soal frekuensi percobaan penipuan digital yang diterima masyarakat, termasuk modus iming-iming hadiah.",
+          "url": "https://babelinsight.com"
+        }
+      ],
+      "indikasi": [
+        "Iming-iming hadiah/undian mendadak",
+        "Mendesak klaim segera sebelum batas waktu",
+        "Meminta login ulang lewat tautan"
+      ],
+      "tindakan": [
+        "Jangan klik tautan.",
+        "Jangan login ulang lewat tautan pesan.",
+        "Cek klaim langsung dari aplikasi resmi jika ragu."
+      ]
+    },
+    "otp_pretext": {
+      "label": "Permintaan Kode OTP Langsung",
+      "tips": "OTP itu SELALU untuk kamu sendiri. Siapa pun yang minta kamu kirim ulang kode OTP — walau ngaku kenal atau salah kirim — jangan pernah dikasih.",
+      "rekomendasi": "Kalau ada yang minta OTP dengan alasan apa pun (termasuk 'salah kirim'), abaikan dan jangan balas. OTP asli dari bank/aplikasi resmi tidak pernah minta dikirim balik.",
+      "artikel_rujukan": [
+        {
+          "judul": "Mayoritas Korban Phishing Berusia 25-40 Tahun",
+          "sumber": "Jurnal Akuntansi, Bisnis dan Ekonomi Indonesia",
+          "catatan": "Studi akademik soal karakteristik korban phishing di Indonesia dan kaitannya dengan intensitas penggunaan internet.",
+          "url": ""
+        }
+      ],
+      "indikasi": [
+        "Meminta OTP, PIN, atau password",
+        "Mendesak verifikasi akun",
+        "Alasan \"salah kirim\" kode verifikasi"
+      ],
+      "tindakan": [
+        "Jangan berikan kode OTP/PIN/password ke siapa pun.",
+        "Abaikan permintaan tersebut.",
+        "Hubungi pihak resmi jika ragu."
+      ]
+    },
+    "umum": {
+      "label": "Pola Mencurigakan Umum",
+      "tips": "Jangan klik link, jangan bagikan OTP/PIN/password ke siapa pun. Kalau ragu, verifikasi langsung lewat aplikasi resmi, bukan lewat link/kontak yang ada di pesan ini.",
+      "rekomendasi": "Kalau ragu pesan ini asli atau tidak, hubungi Kontak OJK 157 atau cek di cekrekening.id sebelum bertindak.",
+      "artikel_rujukan": [],
+      "indikasi": [
+        "Menunjukkan pola bahasa mendesak/manipulatif",
+        "Mengarahkan ke tautan atau permintaan data sensitif"
+      ],
+      "tindakan": [
+        "Jangan klik tautan.",
+        "Jangan berikan OTP/PIN/password.",
+        "Hubungi pihak resmi jika ragu."
+      ]
+    }
+  }
+}

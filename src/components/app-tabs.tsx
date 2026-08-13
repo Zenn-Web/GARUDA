@@ -1,19 +1,20 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
-import { useColorScheme } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 
+// Catatan: ikon tab pakai src={require(png)}, BUKAN NativeTabs.Trigger.VectorIcon —
+// VectorIcon memanggil expo-font.renderToImageAsync untuk rasterisasi font, yang belum
+// diimplementasikan di platform web dan bikin seluruh proses Metro crash saat SSR web.
+//
+// Tidak mengikuti useColorScheme() sistem — GARUDA light-only, lihat CONTEXT.md.
 export default function AppTabs() {
-  const scheme = useColorScheme();
-  const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
-
   return (
     <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
+      backgroundColor={Colors.background}
+      indicatorColor={Colors.backgroundElement}
+      labelStyle={{ selected: { color: Colors.text } }}>
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Label>Beranda</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon
           src={require('@/assets/images/tabIcons/home.png')}
           renderingMode="template"
