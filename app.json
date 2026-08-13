@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "garuda-app",
+    "name": "GARUDA",
     "slug": "the-garuda-project",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -56,6 +56,6 @@
         "projectId": "2798c615-e0b4-4a76-9776-0ee4d025027b"
       }
     },
-    "owner": "zenifen"
+    "owner": "GARUDAPROJECT"
   }
 }

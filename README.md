@@ -3,7 +3,7 @@
 Aplikasi Android untuk mendeteksi pesan penipuan (scam/phishing) berbahasa Indonesia,
 dirancang khusus untuk pengguna lanjut usia. Pengguna menempel atau mengetik pesan yang
 mencurigakan, lalu GARUDA memberi penilaian **BAHAYA** atau **AMAN** beserta indikasi pola
-yang dikenali dan langkah yang disarankan (bukan angka tingkat keyakinan — dianggap sulit
+yang dikenali dan langkah yang disarankan (bukan angka tingkat keyakinan dianggap sulit
 dipahami pengguna lansia).
 
 Deteksi berjalan **100% di perangkat (offline)**, isi pesan tidak pernah dikirim ke
@@ -31,7 +31,7 @@ server mana pun.
 - Node.js + npm
 - Android Studio (emulator) atau HP Android fisik
 - Project ini memakai **native module** (Firebase, clipboard), jadi **tidak bisa** dijalankan
-  lewat Expo Go biasa — wajib development build.
+  lewat Expo Go biasa wajib development build.
 
 ### Pertama kali (atau setelah menambah package native)
 
@@ -136,7 +136,7 @@ Result    ──[tekan "Periksa Pesan Lain"]──►  Home (/?reset=…), input
 ```
 
 `Home` memanggil `deteksiScam()` untuk status BAHAYA/AMAN dan `kategorikanPesan()` untuk kategori
-modus, lalu mengirim keduanya ke `Result` lewat parameter URL — **bukan teks pesan mentah**
+modus, lalu mengirim keduanya ke `Result` lewat parameter URL **bukan teks pesan mentah**
 (alasan privasi). `Result` memakai `kategori` untuk lookup `knowledgeBase.json` (indikasi &
 tindakan). Angka _confidence_ tidak lagi ditampilkan di layar manapun (v3).
 
@@ -157,7 +157,7 @@ React Native tidak mempermasalahkan keduanya berdampingan.
 
 Sumber kebenaran ada di [`Design/DESIGN.md`](Design/DESIGN.md) dan
 [`Design/code.html`](Design/code.html). Seluruh token disalin ke
-[`tailwind.config.js`](tailwind.config.js) — **jangan tulis nilai warna/font baru di luar
+[`tailwind.config.js`](tailwind.config.js) **jangan tulis nilai warna/font baru di luar
 itu.**
 
 **Prinsip utama** (semuanya untuk keterbacaan pengguna lansia):
@@ -166,7 +166,7 @@ itu.**
 - Kontras teks minimal **7:1**
 - Setiap elemen yang bisa ditekan tingginya minimal **56px**
 - Margin samping 24px agar jempol tidak memicu gestur tepi layar OS
-- Status tidak boleh dibedakan dari warna saja — selalu ada ikon + teks
+- Status tidak boleh dibedakan dari warna saja selalu ada ikon + teks
 
 **Warna status** (disegarkan ke hex v3):
 
@@ -232,7 +232,7 @@ cakupan model teks, dan dicatat sebagai pengembangan lanjutan.
 
 ### Sudah jalan
 
-- Input pesan manual, dengan deteksi clipboard otomatis (`expo-clipboard` + `AppState`) —
+- Input pesan manual, dengan deteksi clipboard otomatis (`expo-clipboard` + `AppState`) 
   teks yang baru disalin otomatis mengisi kolom input, tapi **tidak** langsung dianalisis;
   pengguna tetap yang menekan tombol
 - Kotak info privasi ("Pemeriksaan berlangsung di perangkat...") selalu tampil di Home
@@ -249,16 +249,16 @@ cakupan model teks, dan dicatat sebagai pengembangan lanjutan.
 | Fitur                      | Status                                                                                                                                        |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Onboarding                 | Mockup sudah ada (`Design/code.html`), belum diimplementasikan                                                                                |
-| Bagikan ke Guardian        | **Dicabut dari Result Screen (v3)** — titik akses baru belum ditentukan, menunggu `GARUDA_Pairing_Guardian_Roadmap.md` yang belum ada di repo |
-| Tab Panduan                 | **Dicabut total** dari bottom nav (bukan disabled) — "coming soon", menunggu referensi visual sebelum dibangun ulang                          |
+| Bagikan ke Guardian        | **Dicabut dari Result Screen (v3)** titik akses baru belum ditentukan, menunggu `GARUDA_Pairing_Guardian_Roadmap.md` yang belum ada di repo |
+| Tab Panduan                 | **Dicabut total** dari bottom nav (bukan disabled) "coming soon", menunggu referensi visual sebelum dibangun ulang                          |
 | Berita Terkait (data asli) | Masih 2 artikel contoh, belum tersambung ke API berita                                                                                        |
 | Laporan nomor telepon      | Sengaja tidak dikerjakan pada iterasi ini                                                                                                     |
-| Verifikasi pengirim/domain | Di luar cakupan model teks — pengembangan lanjutan                                                                                            |
+| Verifikasi pengirim/domain | Di luar cakupan model teks pengembangan lanjutan                                                                                            |
 
 ### Firebase
 
 `@react-native-firebase/app`, `auth`, `firestore`, dan `messaging` **sudah terpasang dan
-aktif** — SDK berhasil diinisialisasi saat aplikasi dibuka dan terhubung ke project
+aktif** SDK berhasil diinisialisasi saat aplikasi dibuka dan terhubung ke project
 `garuda-project-89c40`.
 
 Namun **belum ada satu baris kode pun yang memakainya.** Semuanya disiapkan untuk fitur
@@ -281,7 +281,7 @@ Lokasi aman: `__tests__/` di root, atau folder mana pun di luar `src/app/`
 (`src/model/GarudaBrain.test.js` aman karena `src/model/` bukan bagian dari router).
 
 **Urutan `paths` di `tsconfig.json` berpengaruh.** Pola yang lebih spesifik harus di atas
-yang umum — `@/assets/*` sebelum `@/*` — kalau tidak, `@/assets/…` akan salah dipetakan ke
+yang umum — `@/assets/*` sebelum `@/*` kalau tidak, `@/assets/…` akan salah dipetakan ke
 `src/assets/…`.
 
 **`jest-setup.js` mem-_mock_ `react-native-worklets` dan komponen `animated-icon`.**
@@ -289,7 +289,7 @@ Keduanya butuh runtime native (JSI) yang tidak tersedia di Jest, sementara anima
 murni dekorasi dan tidak memengaruhi alur yang diuji.
 
 **Jangan pakai `NativeTabs.Trigger.VectorIcon` di `app-tabs.tsx`.** Komponen ini memanggil
-`expo-font.renderToImageAsync` untuk merasterisasi ikon jadi image saat SSR/static export —
+`expo-font.renderToImageAsync` untuk merasterisasi ikon jadi image saat SSR/static export 
 API ini belum diimplementasikan di platform web dan bikin **seluruh proses Metro crash**
 (bukan cuma halaman error) begitu ada request web masuk, baik lewat `expo export
 --platform web` maupun dev server biasa. Karena Metro yang sama juga melayani dev client
@@ -297,10 +297,27 @@ Android, ini bisa memutus sesi Android yang sedang berjalan. Pakai `src={require
 (seperti ikon tab Beranda) yang tidak lewat jalur rasterisasi font, atau biarkan trigger
 label-only kalau belum ada aset ikon.
 
-**Ubah `icon`/`adaptiveIcon`/splash di `app.json`? Wajib `npx expo prebuild --platform
-android --clean` sebelum build ulang.** Folder `android/` di-generate sekali dan tidak
-otomatis sinkron dari `app.json` — mengubah config tanpa prebuild ulang membuat APK tetap
-pakai ikon/splash lama walau kodenya sudah benar.
+**Ubah `icon`/`adaptiveIcon`/splash/`name` di `app.json`? Wajib prebuild ulang sebelum
+build.** Folder `android/` di-generate sekali dan tidak otomatis sinkron dari `app.json`
+— mengubah config tanpa prebuild ulang membuat APK tetap pakai ikon/splash/nama lama
+walau kodenya sudah benar. Pakai `npm run prebuild:android` (bukan `npx expo prebuild`
+polos) — script ini juga menambal `windowSplashScreenIconBackgroundColor` yang hilang
+(lihat catatan splash di bawah) supaya tidak perlu diulang manual.
+
+**Splash screen: kotak abu-abu di belakang ikon (Android, belum terpecahkan).** Di
+device fisik (Infinix/XOS) ikon splash tampil dengan kotak `#CDCDCE` membungkusnya,
+alih-alih menyatu dengan `windowSplashScreenBackground` (`#F8F9FA`). Sudah dipastikan
+BUKAN karena: (a) aset PNG-nya sendiri — transparansinya sudah diverifikasi lewat alpha
+channel; (b) `windowSplashScreenIconBackgroundColor` tidak di-set — sudah ditambal via
+`scripts/fix-splash-icon-background.js` (perhatikan: atributnya TANPA prefix `android:`,
+beda dari `android:windowSplashScreenBehavior` di style yang sama) dan sudah diverifikasi
+ter-compile benar ke APK (`aapt2 dump resources`), tapi kotaknya tetap muncul persis
+sama. Dua hipotesis tersisa yang belum diuji: (1) ini shadow/elevation otomatis Android
+di belakang ikon splash apa pun, tidak terkait warna latar sama sekali — perlu icon
+adaptive-icon XML asli, bukan PNG persegi biasa; (2) quirk render SplashScreen khusus
+skin OEM (XOS) yang tidak menghormati API standar meski config app sudah benar. Splash
+cuma tampil sepersekian detik jadi diprioritaskan rendah — kalau mau lanjut investigasi,
+mulai dari hipotesis (1).
 
 **Build Android gagal dengan `WARNING: A restricted method in java.lang.System has been
 called` di task `configureCMakeDebug`?** Ini bug Android Gradle Plugin yang salah
@@ -311,7 +328,7 @@ lalu build dengan `JAVA_HOME` diarahkan ke situ, contoh (Git Bash):
 JAVA_HOME="C:\Program Files\Microsoft\jdk-17.0.20.8-hotspot" npx expo run:android
 ```
 `android/gradle.properties` di-generate ulang tiap prebuild sehingga `org.gradle.java.home`
-tidak persisten di sana — set lewat env var tiap build alih-alih.
+tidak persisten di sana set lewat env var tiap build alih-alih.
 
 ---
 
