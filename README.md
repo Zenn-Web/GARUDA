@@ -299,9 +299,9 @@ label-only kalau belum ada aset ikon.
 
 **Ubah `icon`/`adaptiveIcon`/splash/`name` di `app.json`? Wajib prebuild ulang sebelum
 build.** Folder `android/` di-generate sekali dan tidak otomatis sinkron dari `app.json`
-— mengubah config tanpa prebuild ulang membuat APK tetap pakai ikon/splash/nama lama
+mengubah config tanpa prebuild ulang membuat APK tetap pakai ikon/splash/nama lama
 walau kodenya sudah benar. Pakai `npm run prebuild:android` (bukan `npx expo prebuild`
-polos) — script ini juga menambal `windowSplashScreenIconBackgroundColor` yang hilang
+polos) script ini juga menambal `windowSplashScreenIconBackgroundColor` yang hilang
 (lihat catatan splash di bawah) supaya tidak perlu diulang manual.
 
 **Splash screen: kotak abu-abu di belakang ikon (Android, belum terpecahkan).** Di
@@ -310,14 +310,14 @@ device fisik (Infinix/XOS, **Android 16 / API 36**) ikon splash tampil dengan ko
 (`#F8F9FA`). Sudah diuji dan dipastikan **bukan** karena salah satu dari:
 
 1. Aset PNG-nya sendiri — transparansi sudah diverifikasi lewat alpha channel langsung.
-2. `windowSplashScreenIconBackgroundColor` tidak di-set — sudah ditambal via
+2. `windowSplashScreenIconBackgroundColor` tidak di-set sudah ditambal via
    `scripts/fix-splash-icon-background.js` (atributnya TANPA prefix `android:`, beda
    dari `android:windowSplashScreenBehavior` di style yang sama), dan sudah diverifikasi
    ter-compile benar ke APK (`aapt2 dump resources`).
 3. `<Image>` dari `expo-image` di `AnimatedSplashOverlay` (JS-side splash overlay,
-   `src/components/animated-icon.tsx`) — sudah ditambahkan `backgroundColor: 'transparent'`
+   `src/components/animated-icon.tsx`) sudah ditambahkan `backgroundColor: 'transparent'`
    eksplisit ke style-nya.
-4. Fitur "Ikon Bertema" (Themed Icons/Material You) di launcher — sudah dicek manual,
+4. Fitur "Ikon Bertema" (Themed Icons/Material You) di launcher sudah dicek manual,
    tidak aktif/tidak ada opsinya di HP yang dites.
 
 Ketiga fix di atas semuanya benar secara teknis (masing-masing diverifikasi terpasang),
