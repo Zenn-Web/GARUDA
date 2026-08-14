@@ -305,19 +305,28 @@ polos) — script ini juga menambal `windowSplashScreenIconBackgroundColor` yang
 (lihat catatan splash di bawah) supaya tidak perlu diulang manual.
 
 **Splash screen: kotak abu-abu di belakang ikon (Android, belum terpecahkan).** Di
-device fisik (Infinix/XOS) ikon splash tampil dengan kotak `#CDCDCE` membungkusnya,
-alih-alih menyatu dengan `windowSplashScreenBackground` (`#F8F9FA`). Sudah dipastikan
-BUKAN karena: (a) aset PNG-nya sendiri — transparansinya sudah diverifikasi lewat alpha
-channel; (b) `windowSplashScreenIconBackgroundColor` tidak di-set — sudah ditambal via
-`scripts/fix-splash-icon-background.js` (perhatikan: atributnya TANPA prefix `android:`,
-beda dari `android:windowSplashScreenBehavior` di style yang sama) dan sudah diverifikasi
-ter-compile benar ke APK (`aapt2 dump resources`), tapi kotaknya tetap muncul persis
-sama. Dua hipotesis tersisa yang belum diuji: (1) ini shadow/elevation otomatis Android
-di belakang ikon splash apa pun, tidak terkait warna latar sama sekali — perlu icon
-adaptive-icon XML asli, bukan PNG persegi biasa; (2) quirk render SplashScreen khusus
-skin OEM (XOS) yang tidak menghormati API standar meski config app sudah benar. Splash
-cuma tampil sepersekian detik jadi diprioritaskan rendah — kalau mau lanjut investigasi,
-mulai dari hipotesis (1).
+device fisik (Infinix/XOS, **Android 16 / API 36**) ikon splash tampil dengan kotak
+`#CDCDCE` membungkusnya, alih-alih menyatu dengan `windowSplashScreenBackground`
+(`#F8F9FA`). Sudah diuji dan dipastikan **bukan** karena salah satu dari:
+
+1. Aset PNG-nya sendiri — transparansi sudah diverifikasi lewat alpha channel langsung.
+2. `windowSplashScreenIconBackgroundColor` tidak di-set — sudah ditambal via
+   `scripts/fix-splash-icon-background.js` (atributnya TANPA prefix `android:`, beda
+   dari `android:windowSplashScreenBehavior` di style yang sama), dan sudah diverifikasi
+   ter-compile benar ke APK (`aapt2 dump resources`).
+3. `<Image>` dari `expo-image` di `AnimatedSplashOverlay` (JS-side splash overlay,
+   `src/components/animated-icon.tsx`) — sudah ditambahkan `backgroundColor: 'transparent'`
+   eksplisit ke style-nya.
+4. Fitur "Ikon Bertema" (Themed Icons/Material You) di launcher — sudah dicek manual,
+   tidak aktif/tidak ada opsinya di HP yang dites.
+
+Ketiga fix di atas semuanya benar secara teknis (masing-masing diverifikasi terpasang),
+tapi kotaknya tetap identik persis di semua percobaan. Pola ini paling mengarah ke **gap
+kompatibilitas `androidx.core.splashscreen` v1.2.0 dengan Android 16/API 36** — versi OS
+yang sangat baru, kemungkinan besar rilisnya mendahului update library ini untuk API
+level tersebut. Splash cuma tampil sepersekian detik jadi diprioritaskan rendah. Kalau
+mau lanjut: coba update `androidx.core.splashscreen` ke versi lebih baru (cek apakah ada
+rilis yang eksplisit mendukung API 36) sebagai langkah berikutnya.
 
 **Build Android gagal dengan `WARNING: A restricted method in java.lang.System has been
 called` di task `configureCMakeDebug`?** Ini bug Android Gradle Plugin yang salah

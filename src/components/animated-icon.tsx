@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
   image: {
     width: 96,
     height: 97,
+    backgroundColor: 'transparent',
   },
 });
