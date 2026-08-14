@@ -322,7 +322,7 @@ device fisik (Infinix/XOS, **Android 16 / API 36**) ikon splash tampil dengan ko
 
 Ketiga fix di atas semuanya benar secara teknis (masing-masing diverifikasi terpasang),
 tapi kotaknya tetap identik persis di semua percobaan. Pola ini paling mengarah ke **gap
-kompatibilitas `androidx.core.splashscreen` v1.2.0 dengan Android 16/API 36** — versi OS
+kompatibilitas `androidx.core.splashscreen` v1.2.0 dengan Android 16/API 36** versi OS
 yang sangat baru, kemungkinan besar rilisnya mendahului update library ini untuk API
 level tersebut. Splash cuma tampil sepersekian detik jadi diprioritaskan rendah. Kalau
 mau lanjut: coba update `androidx.core.splashscreen` ke versi lebih baru (cek apakah ada
