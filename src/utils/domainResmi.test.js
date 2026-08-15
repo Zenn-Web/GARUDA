@@ -84,4 +84,37 @@ describe('koreksiDomainResmi', () => {
 
     expect(hasil.confidence).toBe(91.2);
   });
+
+  describe('dikoreksiOlehDomainResmi (flag buat menandai kalau status dikoreksi oleh domain resmi)', () => {
+    test('true kalau status benar-benar dikoreksi jadi AMAN', () => {
+      const hasil = koreksiDomainResmi('s.bps.go.id/wut32', { status: 'SCAM', confidence: 91.2 });
+
+      expect(hasil.dikoreksiOlehDomainResmi).toBe(true);
+    });
+
+    test('false kalau pesan tetap SCAM (ada domain non-whitelist)', () => {
+      const teks = 'BPJS Kesehatan Anda akan diblokir dalam 24 jam! Verifikasi di bpjs-kesehatan.go.id, atau klik: bit.ly/verif-otp';
+      const hasil = koreksiDomainResmi(teks, { status: 'SCAM', confidence: 88 });
+
+      expect(hasil.dikoreksiOlehDomainResmi).toBe(false);
+    });
+
+    test('false kalau pesan tidak mengandung domain sama sekali', () => {
+      const hasil = koreksiDomainResmi('Rekening Anda akan diblokir jika tidak konfirmasi sekarang', {
+        status: 'SCAM',
+        confidence: 97,
+      });
+
+      expect(hasil.dikoreksiOlehDomainResmi).toBe(false);
+    });
+  
+    test('false kalau status AMAN dari awal (bukan hasil koreksi whitelist domain resmi)', () => {
+      const hasilAsli = { status: 'AMAN', confidence: 82.5 };
+      const hasil = koreksiDomainResmi('Halo, jadi jemput jam berapa nanti sore?', hasilAsli);
+
+      expect(hasil.dikoreksiOlehDomainResmi).toBe(false);
+    });
+    
+  });
+
 });
