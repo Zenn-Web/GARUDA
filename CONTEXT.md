@@ -16,6 +16,22 @@ Output dari `deteksiScam()`: `{ status: 'SCAM' | 'AMAN', confidence: number }`.
 Ditampilkan sebagai **BAHAYA** (merah, kalau status SCAM) atau **AMAN** (hijau).
 _Avoid_: Result, Prediction (istilah model ML generik — di project ini selalu disebut Hasil/HasilDeteksi)
 
+**Domain Resmi**:
+Domain yang berakhiran `.go.id`, `.ac.id`, `.mil.id`, atau `.desa.id` — dikontrol PANDI, cuma
+bisa didaftarkan instansi negara yang mengirim dokumen verifikasi resmi. `koreksiDomainResmi()`
+di `src/utils/domainResmi.js` memakai daftar ini untuk mengoreksi `HasilDeteksi.status` dari
+SCAM ke AMAN, TAPI HANYA kalau semua domain yang disebut di pesan adalah Domain Resmi (tidak
+ada satu pun domain lain yang menyertai) — mencegah pola umpan phishing yang menyebut nama
+instansi resmi sambil menyisipkan link jebakan lain di pesan yang sama. `confidence` tidak
+diubah oleh koreksi ini. Jalan SETELAH `deteksiScam()`, murni deterministik (bukan ML, tidak
+butuh retraining) — `deteksiScam()` sendiri tidak dan tidak akan pernah punya konsep reputasi
+domain, itu bag-of-words TF-IDF murni.
+_Avoid_: Domain terverifikasi, whitelist domain (istilah generik — di project ini selalu
+disebut Domain Resmi). Domain vendor/brand komersial (Telkomsel, Dicoding, dst) SENGAJA di
+luar cakupan Domain Resmi — false positive di domain itu tetap keterbatasan model yang
+didokumentasikan, bukan diselesaikan lewat mekanisme ini. `.or.id` juga sengaja dikeluarkan
+(syarat daftarnya longgar, mirip risiko domain komersial).
+
 **Guardian**:
 Kontak keluarga/wali opsional yang bisa menerima notifikasi hasil deteksi dari user.
 Bersifat sepenuhnya opsional — user bisa pakai GARUDA sendirian tanpa Guardian.

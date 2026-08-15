@@ -15,6 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Clipboard from 'expo-clipboard';
 
 import { deteksiScam } from '@/model/GarudaBrain';
+import { koreksiDomainResmi } from '@/utils/domainResmi';
 import { kategorikanPesan } from '@/utils/kategorisasi';
 
 type HasilDeteksi = {
@@ -36,7 +37,7 @@ function HomeContent() {
 
   const cekPesan = () => {
     if (!teks.trim()) return;
-    const hasilDeteksi = deteksiScam(teks) as HasilDeteksi;
+    const hasilDeteksi = koreksiDomainResmi(teks, deteksiScam(teks) as HasilDeteksi);
     const kategori = kategorikanPesan(teks);
     router.push({
       pathname: '/result',
